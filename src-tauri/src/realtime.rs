@@ -158,9 +158,10 @@ fn build_request(api_key: &str, model: &str) -> AppResult<Request<()>> {
             .map_err(|err| AppError::Realtime(err.to_string()))?,
     );
     headers.insert("OpenAI-Beta", HeaderValue::from_static("realtime=v1"));
+    let subprotocols = build_subprotocol_header(api_key);
     headers.insert(
         "Sec-WebSocket-Protocol",
-        HeaderValue::from_static("openai-realtime-v1"),
+        HeaderValue::from_str(&subprotocols).map_err(|err| AppError::Realtime(err.to_string()))?,
     );
     Ok(request)
 }
@@ -171,4 +172,13 @@ fn encode_samples(samples: &[i16]) -> String {
         buf.extend_from_slice(&sample.to_le_bytes());
     }
     BASE64.encode(&buf)
+}
+
+fn build_subprotocol_header(api_key: &str) -> String {
+    // keep "realtime" first; include insecure api key token for compatibility with hosted envs
+    let mut entries = Vec::with_capacity(3);
+    entries.push("realtime".to_string());
+    entries.push(format!("openai-insecure-api-key.{api_key}"));
+    entries.push("openai-beta.realtime-v1".to_string());
+    entries.join(",")
 }
