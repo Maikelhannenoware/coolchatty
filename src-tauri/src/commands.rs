@@ -2,13 +2,15 @@ use std::time::Duration;
 
 use serde::Serialize;
 use tauri::{AppHandle, State};
+use tracing::info;
 
 use crate::audio::RecorderRequest;
+use crate::errors::{AppError, CommandError, CommandResult};
 use crate::history::HistoryEntry;
 use crate::paste::PasteOutcome;
+use crate::realtime;
 use crate::settings::{AppSettings, DEFAULT_REALTIME_MODEL};
 use crate::state::AppState;
-use crate::websocket;
 
 #[derive(Debug, Serialize)]
 pub struct RecordingSummary {
@@ -18,71 +20,76 @@ pub struct RecordingSummary {
 }
 
 #[tauri::command]
-pub async fn start_recording(state: State<'_, AppState>) -> Result<(), String> {
+pub async fn start_recording(state: State<'_, AppState>) -> CommandResult<()> {
     let settings = state.settings.get().await;
     if settings.api_key.trim().is_empty() {
-        return Err("Please provide an OpenAI API key in settings.".into());
+        return Err(AppError::MissingApiKey.into());
     }
 
-    state
+    let sample_rate = state
         .recorder
         .start(RecorderRequest {
             sample_rate: settings.sample_rate,
             input_device: settings.input_device.clone(),
         })
-        .map_err(|e| e.to_string())?;
+        .map_err(CommandError::from)?;
 
     let audio_rx = state
         .recorder
         .take_receiver()
-        .ok_or_else(|| "audio stream unavailable".to_string())?;
+        .ok_or(AppError::AudioStreamUnavailable)
+        .map_err(CommandError::from)?;
 
     let api_key = settings.api_key.clone();
     let model = settings.model.clone();
-    let sample_rate = settings.sample_rate;
-    let handle: tokio::task::JoinHandle<anyhow::Result<String>> = tokio::spawn(async move {
-        websocket::stream_transcription(api_key, model, sample_rate, audio_rx).await
+    let handle = tokio::spawn(async move {
+        realtime::stream_transcription(api_key, model, sample_rate, audio_rx).await
     });
 
     state
         .recorder
         .attach_session(handle)
-        .map_err(|e| e.to_string())?;
+        .map_err(CommandError::from)?;
 
     Ok(())
 }
 
 #[tauri::command]
-pub async fn stop_recording(state: State<'_, AppState>) -> Result<RecordingSummary, String> {
+pub async fn stop_recording(state: State<'_, AppState>) -> CommandResult<RecordingSummary> {
     let duration: Duration = state
         .recorder
         .stop()
         .await
-        .map_err(|e| e.to_string())?
-        .ok_or_else(|| "recorder is not running".to_string())?;
+        .map_err(CommandError::from)?
+        .ok_or(AppError::RecorderNotRunning)
+        .map_err(CommandError::from)?;
 
     let handle = state
         .recorder
         .take_session()
-        .ok_or_else(|| "no active session".to_string())?;
+        .ok_or(AppError::RecorderNotRunning)
+        .map_err(CommandError::from)?;
     let mut settings = state.settings.get().await;
-    let transcript = match handle.await.map_err(|e| e.to_string())? {
-        Ok(text) => text,
-        Err(err) => {
-            let err_string = err.to_string();
-            if is_model_error(&err_string) && settings.model != DEFAULT_REALTIME_MODEL {
+
+    let transcript = match handle.await {
+        Ok(Ok(text)) => text,
+        Ok(Err(err)) => {
+            let err_message = err.to_string();
+            if is_model_error(&err_message) && settings.model != DEFAULT_REALTIME_MODEL {
                 settings.model = DEFAULT_REALTIME_MODEL.into();
                 state
                     .settings
                     .update(settings.clone())
                     .await
-                    .map_err(|e| e.to_string())?;
-                return Err(format!(
-                    "{err_string}. Model reset to GPT Realtime mini. Please try again."
-                ));
+                    .map_err(CommandError::from)?;
+                return Err(AppError::Validation(format!(
+                    "{err_message}. Model reset to GPT Realtime mini. Please try again."
+                ))
+                .into());
             }
-            return Err(err_string);
+            return Err(err.into());
         }
+        Err(err) => return Err(AppError::Internal(err.to_string()).into()),
     };
 
     let pasted = if transcript.trim().is_empty() {
@@ -92,7 +99,7 @@ pub async fn stop_recording(state: State<'_, AppState>) -> Result<RecordingSumma
             state
                 .paste
                 .apply(&transcript, settings.auto_paste)
-                .map_err(|e| e.to_string())?,
+                .map_err(CommandError::from)?,
             PasteOutcome::SimulatedPaste
         )
     };
@@ -102,8 +109,14 @@ pub async fn stop_recording(state: State<'_, AppState>) -> Result<RecordingSumma
             .history
             .add(&transcript)
             .await
-            .map_err(|e| e.to_string())?;
+            .map_err(CommandError::from)?;
     }
+
+    info!(
+        "Recording finished (duration={} ms, pasted={})",
+        duration.as_millis(),
+        pasted
+    );
 
     Ok(RecordingSummary {
         text: transcript,
@@ -113,45 +126,46 @@ pub async fn stop_recording(state: State<'_, AppState>) -> Result<RecordingSumma
 }
 
 #[tauri::command]
-pub async fn recorder_status(state: State<'_, AppState>) -> Result<bool, String> {
+pub async fn recorder_status(state: State<'_, AppState>) -> CommandResult<bool> {
     Ok(state.recorder.is_recording())
 }
 
 #[tauri::command]
-pub async fn get_history(state: State<'_, AppState>) -> Result<Vec<HistoryEntry>, String> {
-    state.history.all().await.map_err(|e| e.to_string())
+pub async fn get_history(state: State<'_, AppState>) -> CommandResult<Vec<HistoryEntry>> {
+    state.history.all().await.map_err(CommandError::from)
 }
 
 #[tauri::command]
-pub async fn clear_history(state: State<'_, AppState>) -> Result<(), String> {
-    state.history.clear().await.map_err(|e| e.to_string())
+pub async fn clear_history(state: State<'_, AppState>) -> CommandResult<()> {
+    state.history.clear().await.map_err(CommandError::from)
 }
 
 #[tauri::command]
-pub async fn trigger_record_event(
-    app: AppHandle,
-    state: State<'_, AppState>,
-) -> Result<(), String> {
+pub async fn trigger_record_event(app: AppHandle, state: State<'_, AppState>) -> CommandResult<()> {
     state.hotkeys.emit_trigger(&app);
     Ok(())
 }
 
 #[tauri::command]
-pub async fn get_settings(state: State<'_, AppState>) -> Result<AppSettings, String> {
+pub async fn get_settings(state: State<'_, AppState>) -> CommandResult<AppSettings> {
     Ok(state.settings.get().await)
 }
 
 #[tauri::command]
 pub async fn save_settings(
+    app: AppHandle,
     state: State<'_, AppState>,
     settings: AppSettings,
-) -> Result<(), String> {
+) -> CommandResult<()> {
     state
         .settings
         .update(settings.clone())
         .await
-        .map_err(|e| e.to_string())?;
-    state.hotkeys.update(settings.hotkey.clone());
+        .map_err(CommandError::from)?;
+    state
+        .hotkeys
+        .update(&app, settings.hotkey.clone())
+        .map_err(CommandError::from)?;
     Ok(())
 }
 

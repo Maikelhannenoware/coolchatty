@@ -2,7 +2,7 @@ use std::sync::Arc;
 
 use crate::audio::RecorderService;
 use crate::history::HistoryStore;
-use crate::hotkeys::HotkeyManager;
+use crate::hotkey::HotkeyManager;
 use crate::paste::PasteManager;
 use crate::settings::SettingsStore;
 
