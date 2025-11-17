@@ -1,0 +1,31 @@
+[package]
+name = "coolchatty"
+version = "0.1.0"
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "2.5.2", features = [] }
+
+[dependencies]
+anyhow = "1"
+arboard = "3"
+base64 = "0.22"
+bytes = "1"
+cpal = "0.16"
+directories = "6"
+enigo = { version = "0.6" }
+futures = "0.3"
+parking_lot = "0.12"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sqlx = { version = "0.7", features = ["sqlite", "runtime-tokio-rustls"] }
+tauri = { version = "2.9.3", features = [] }
+tauri-plugin-global-shortcut = "2.3.1"
+thiserror = "1"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "sync"] }
+tokio-tungstenite = { version = "0.28", features = ["rustls-tls-webpki-roots"] }
+rustls = { version = "0.23", default-features = false, features = ["std", "aws_lc_rs"] }
+uuid = { version = "1", features = ["v4"] }
+
+[features]
+default = []
