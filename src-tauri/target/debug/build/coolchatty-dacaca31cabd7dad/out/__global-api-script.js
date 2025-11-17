@@ -1,1 +1,0 @@
-["/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-2.9.3/scripts/bundle.global.js","/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-global-shortcut-2.3.1/api-iife.js"]

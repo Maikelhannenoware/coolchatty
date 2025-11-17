@@ -1,0 +1,16 @@
+# Node
+node_modules/
+dist/
+.vite/
+.DS_Store
+
+# Rust + Tauri
+src-tauri/target/
+src-tauri/.cargo/
+src-tauri/gen/
+
+# Logs
+*.log
+
+# OS
+Thumbs.db

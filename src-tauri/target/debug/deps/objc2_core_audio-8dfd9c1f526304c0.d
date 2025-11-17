@@ -1,8 +1,0 @@
-/Users/maikel/projects/coolchatty/src-tauri/target/debug/deps/objc2_core_audio-8dfd9c1f526304c0.d: /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-0.3.2/src/lib.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-0.3.2/src/generated/mod.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-0.3.2/src/generated/AudioHardware.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-0.3.2/src/generated/AudioHardwareDeprecated.rs
-
-/Users/maikel/projects/coolchatty/src-tauri/target/debug/deps/libobjc2_core_audio-8dfd9c1f526304c0.rmeta: /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-0.3.2/src/lib.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-0.3.2/src/generated/mod.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-0.3.2/src/generated/AudioHardware.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-0.3.2/src/generated/AudioHardwareDeprecated.rs
-
-/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-0.3.2/src/lib.rs:
-/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-0.3.2/src/generated/mod.rs:
-/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-0.3.2/src/generated/AudioHardware.rs:
-/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-0.3.2/src/generated/AudioHardwareDeprecated.rs:
