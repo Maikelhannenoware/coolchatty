@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "CoolChatty",
+  "version": "0.1.0",
+  "identifier": "com.coolchatty.CoolChatty",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "devUrl": "http://localhost:1420",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "security": {
+      "csp": null
+    },
+    "windows": [
+      {
+        "label": "main",
+        "title": "CoolChatty",
+        "width": 480,
+        "height": 600,
+        "resizable": true,
+        "fullscreen": false,
+        "transparent": false
+      }
+    ]
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/icon.png"
+    ],
+    "macOS": {
+      "minimumSystemVersion": "11.0",
+      "hardenedRuntime": true,
+      "entitlements": null,
+      "exceptionDomain": null,
+      "signingIdentity": null,
+      "infoPlist": "Info.plist"
+    }
+  }
+}

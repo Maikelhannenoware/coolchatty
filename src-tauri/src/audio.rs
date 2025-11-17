@@ -149,6 +149,12 @@ fn capture_loop(
                     continue;
                 }
                 total_samples += chunk.len();
+                let chunk_ms = (chunk.len() as f32 / sample_rate as f32) * 1000.0;
+                let total_ms = (total_samples as f32 / sample_rate as f32) * 1000.0;
+                println!(
+                    "[audio] received chunk with {} samples (~{chunk_ms:.1} ms), total ~{total_ms:.1} ms",
+                    chunk.len()
+                );
                 if tx.blocking_send(chunk).is_err() {
                     break;
                 }
