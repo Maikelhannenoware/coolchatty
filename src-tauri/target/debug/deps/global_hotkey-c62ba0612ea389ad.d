@@ -1,0 +1,10 @@
+/Users/maikel/projects/coolchatty/src-tauri/target/debug/deps/global_hotkey-c62ba0612ea389ad.d: /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/global-hotkey-0.7.0/src/lib.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/global-hotkey-0.7.0/src/error.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/global-hotkey-0.7.0/src/hotkey.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/global-hotkey-0.7.0/src/platform_impl/mod.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/global-hotkey-0.7.0/src/platform_impl/macos/mod.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/global-hotkey-0.7.0/src/platform_impl/macos/ffi.rs
+
+/Users/maikel/projects/coolchatty/src-tauri/target/debug/deps/libglobal_hotkey-c62ba0612ea389ad.rmeta: /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/global-hotkey-0.7.0/src/lib.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/global-hotkey-0.7.0/src/error.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/global-hotkey-0.7.0/src/hotkey.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/global-hotkey-0.7.0/src/platform_impl/mod.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/global-hotkey-0.7.0/src/platform_impl/macos/mod.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/global-hotkey-0.7.0/src/platform_impl/macos/ffi.rs
+
+/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/global-hotkey-0.7.0/src/lib.rs:
+/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/global-hotkey-0.7.0/src/error.rs:
+/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/global-hotkey-0.7.0/src/hotkey.rs:
+/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/global-hotkey-0.7.0/src/platform_impl/mod.rs:
+/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/global-hotkey-0.7.0/src/platform_impl/macos/mod.rs:
+/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/global-hotkey-0.7.0/src/platform_impl/macos/ffi.rs:

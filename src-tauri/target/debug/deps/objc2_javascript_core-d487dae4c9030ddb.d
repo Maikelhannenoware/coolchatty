@@ -1,0 +1,9 @@
+/Users/maikel/projects/coolchatty/src-tauri/target/debug/deps/objc2_javascript_core-d487dae4c9030ddb.d: /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-javascript-core-0.3.2/src/lib.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-javascript-core-0.3.2/src/generated/mod.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-javascript-core-0.3.2/src/generated/JSBase.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-javascript-core-0.3.2/src/generated/JSContext.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-javascript-core-0.3.2/src/generated/JSValue.rs
+
+/Users/maikel/projects/coolchatty/src-tauri/target/debug/deps/libobjc2_javascript_core-d487dae4c9030ddb.rmeta: /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-javascript-core-0.3.2/src/lib.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-javascript-core-0.3.2/src/generated/mod.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-javascript-core-0.3.2/src/generated/JSBase.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-javascript-core-0.3.2/src/generated/JSContext.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-javascript-core-0.3.2/src/generated/JSValue.rs
+
+/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-javascript-core-0.3.2/src/lib.rs:
+/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-javascript-core-0.3.2/src/generated/mod.rs:
+/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-javascript-core-0.3.2/src/generated/JSBase.rs:
+/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-javascript-core-0.3.2/src/generated/JSContext.rs:
+/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-javascript-core-0.3.2/src/generated/JSValue.rs:

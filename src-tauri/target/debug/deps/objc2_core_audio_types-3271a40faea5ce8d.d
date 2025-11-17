@@ -1,0 +1,8 @@
+/Users/maikel/projects/coolchatty/src-tauri/target/debug/deps/objc2_core_audio_types-3271a40faea5ce8d.d: /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-types-0.3.2/src/lib.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-types-0.3.2/src/base_types.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-types-0.3.2/src/generated/mod.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-types-0.3.2/src/generated/CoreAudioBaseTypes.rs
+
+/Users/maikel/projects/coolchatty/src-tauri/target/debug/deps/libobjc2_core_audio_types-3271a40faea5ce8d.rmeta: /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-types-0.3.2/src/lib.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-types-0.3.2/src/base_types.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-types-0.3.2/src/generated/mod.rs /Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-types-0.3.2/src/generated/CoreAudioBaseTypes.rs
+
+/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-types-0.3.2/src/lib.rs:
+/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-types-0.3.2/src/base_types.rs:
+/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-types-0.3.2/src/generated/mod.rs:
+/Users/maikel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-audio-types-0.3.2/src/generated/CoreAudioBaseTypes.rs:
