@@ -34,7 +34,7 @@ impl HotkeyManager {
     }
 
     fn register_binding(&self, app: &AppHandle, binding: &str) -> AppResult<()> {
-        let normalized = binding.trim();
+        let normalized = normalize_binding(binding.trim());
         let shortcut_manager = app.global_shortcut();
         shortcut_manager.unregister_all().map_err(AppError::from)?;
 
@@ -44,7 +44,7 @@ impl HotkeyManager {
             return Ok(());
         }
 
-        let binding_owned = normalized.to_string();
+        let binding_owned = normalized;
         let payload_binding = binding_owned.clone();
         let event_name = EVENT_NAME.to_string();
         shortcut_manager
@@ -58,5 +58,26 @@ impl HotkeyManager {
         *self.binding.lock() = binding_owned.clone();
         debug!(shortcut = %binding_owned, "registered global hotkey");
         Ok(())
+    }
+}
+
+fn normalize_binding(binding: &str) -> String {
+    if binding.is_empty() {
+        return String::new();
+    }
+    #[cfg(target_os = "macos")]
+    {
+        let mut result = binding.to_string();
+        if result.contains("Alt") {
+            result = result.replace("Alt", "Option");
+        }
+        if result.contains("Cmd") {
+            result = result.replace("Cmd", "Command");
+        }
+        result
+    }
+    #[cfg(not(target_os = "macos"))]
+    {
+        binding.to_string()
     }
 }

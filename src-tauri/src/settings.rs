@@ -21,10 +21,14 @@ pub struct AppSettings {
 
 impl Default for AppSettings {
     fn default() -> Self {
+        #[cfg(target_os = "macos")]
+        let default_hotkey = "Option+Space".to_string();
+        #[cfg(not(target_os = "macos"))]
+        let default_hotkey = "Alt+Space".to_string();
         Self {
             api_key: String::new(),
             model: DEFAULT_REALTIME_MODEL.into(),
-            hotkey: "Alt+Space".into(),
+            hotkey: default_hotkey,
             auto_paste: true,
             save_history: true,
             sample_rate: 16_000,
@@ -93,6 +97,12 @@ impl AppSettings {
     pub fn normalized(mut self) -> Self {
         if self.model.trim().is_empty() {
             self.model = DEFAULT_REALTIME_MODEL.into();
+        }
+        #[cfg(target_os = "macos")]
+        {
+            if self.hotkey.contains("Alt") {
+                self.hotkey = self.hotkey.replace("Alt", "Option");
+            }
         }
         self
     }
